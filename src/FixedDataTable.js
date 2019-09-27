@@ -25,8 +25,8 @@ const FixedDataTableDemo = () =>
     height={500}
     headerHeight={50}>
     <Column
-      header={<Cell>ID</Cell>}
-      columnKey = 'ID'
+      header={<Cell>Id</Cell>}
+      columnKey = 'Id'
       cell={({rowIndex, columnKey, ...props}) => (
         <Cell {...props}>
           {rows[rowIndex][columnKey]}
