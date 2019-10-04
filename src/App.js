@@ -1,29 +1,34 @@
 import React from 'react';
-import logo from './logo.svg';
-
+import FixedDataTableDemo from './FixedDataTable';
 import './App.css';
+import Query from './Query';
+import Results from './Results';
+import { stringify } from 'query-string';
 
-function App() {
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { queryResults: null }
+  }
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <FixedDataTable></FixedDataTable>
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  responseReceiver = result => this.setState({ queryResults: result })
+
+  handleQuery = queryVariables => fetch(`http://localhost:8080/event?${stringify(queryVariables)}`, {  mode: 'cors'})
+    .then(resp => resp.json())
+    .then(this.responseReceiver)
+
+  queryReceiver = queryVariables => this.handleQuery(queryVariables)
+
+  render() {
+    return (
+      <div>
+        <Query onQuery={this.queryReceiver} />
+        <Results >
+          <FixedDataTableDemo data={this.state.queryResults}></FixedDataTableDemo>
+        </Results>
+      </div>
+    );
+  }
 }
 
 export default App;
