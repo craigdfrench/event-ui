@@ -1,5 +1,6 @@
-import React from 'react';
-import './App.css';
+import React from 'react'
+import { connect } from 'react-redux'
+import { fetchEvents } from '../redux/eventActions'
 
 class Results extends React.Component{
     constructor(props) {
@@ -17,5 +18,4 @@ class Results extends React.Component{
         )
     }
 }
-
-export default Results;
+export default connect( null, null)(Results);

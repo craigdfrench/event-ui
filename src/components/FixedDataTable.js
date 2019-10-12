@@ -1,18 +1,35 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Table, Column, Cell } from 'fixed-data-table-2';
+import _ from 'lodash';
 import 'fixed-data-table-2/dist/fixed-data-table.css';
+import { fetchEvents } from "../redux/eventActions"
 
 class FixedDataTableDemo extends React.Component {
 
+  componentDidMount() {
+    const { dispatch, queryValues } = this.props
+    dispatch(fetchEvents(queryValues))
+  }
+
+  componentDidUpdate(prevProps) {
+    const { dispatch, queryValues } = this.props
+    if (!_.isEqual(prevProps.queryValues, this.props.queryValues)) {
+      dispatch(fetchEvents(queryValues))
+    }
+  }
+
   getData = (row, column) =>
-    (this.props.data && typeof this.props.data[row][column] !== 'undefined') ? this.props.data[row][column] : "No data"
+    (this.props.eventResults.items && typeof this.props.eventResults.items[row][column] !== 'undefined') ? this.props.eventResults.items[row][column] : "No data"
 
   render() {
-    if (this.props.data == null) return (<div />)
+    if (this.props.eventResults.error) return (<div> Error: {this.props.errror} </div>)
+    if (this.props.eventResults.loading) return (<div> Loading...</div>)
+    if (this.props.eventResults.items == null) return (<div>No Data</div>)
     else {
       return (<Table
         rowHeight={50}
-        rowsCount={this.props.data.length}
+        rowsCount={this.props.eventResults.items.length}
         width={1000}
         height={500}
         headerHeight={50}>
@@ -91,4 +108,4 @@ class FixedDataTableDemo extends React.Component {
   }
 }
 
-export default FixedDataTableDemo;
+export default connect(state => state)(FixedDataTableDemo)
