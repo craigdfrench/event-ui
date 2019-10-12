@@ -1,12 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import 'fixed-data-table-2/dist/fixed-data-table.css';
+import EventApp from './EventApp';
+import { Provider } from 'react-redux'
+import store from './redux/store'
+
 
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.render(
+    <Provider store={store}> 
+    <EventApp />
+    </Provider>, document.getElementById('root'))
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
