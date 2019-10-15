@@ -55,13 +55,13 @@ export default function (state = initialState, action) {
         case SET_ENVIRONMENT_FILTER:
         case SET_MESSAGE_FILTER:
         case SET_ID_FILTER:
-            return { ...state, [actionMap[action.type]]: action.payload.content }
+            return { ...state, [actionMap[action.type]]: action.payload.contents }
 
         case SET_START_DATE_FILTER:
         case SET_START_TIME_FILTER:
             nextState = {
                 ...state,
-                [actionMap[action.type]]: action.payload.content,
+                [actionMap[action.type]]: action.payload.contents,
             };
             nextState.startTime = mergeDateAndTime( () => moment().startOf("today"), nextState.startDateControl, nextState.startTimeControl)
             return nextState
@@ -70,7 +70,7 @@ export default function (state = initialState, action) {
         case SET_END_TIME_FILTER:
             nextState = {
                 ...state,
-                [actionMap[action.type]]: action.payload.content,
+                [actionMap[action.type]]: action.payload.contents,
             };
             nextState.endTime = mergeDateAndTime( () => moment.endOf("today"), nextState.endDateControl, nextState.endTimeControl)
             return nextState

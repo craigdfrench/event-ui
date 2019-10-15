@@ -32,7 +32,7 @@ const {
         return {
           ...state,
           loading: false,
-          items: action.payload.events
+          items: action.payload.contents
         };
   
       case FETCH_EVENTS_FAILURE:
