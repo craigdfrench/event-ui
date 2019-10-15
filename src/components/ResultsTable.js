@@ -5,7 +5,7 @@ import _ from 'lodash';
 import 'fixed-data-table-2/dist/fixed-data-table.css';
 import { fetchEvents } from "../redux/eventActions"
 
-class FixedDataTableDemo extends React.Component {
+class ResultsTable extends React.Component {
 
   componentDidMount() {
     const { dispatch, queryValues } = this.props
@@ -108,4 +108,4 @@ class FixedDataTableDemo extends React.Component {
   }
 }
 
-export default connect(state => state)(FixedDataTableDemo)
+export default connect(state => state)(ResultsTable)
