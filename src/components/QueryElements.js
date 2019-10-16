@@ -3,9 +3,11 @@ import 'react-dates/initialize';
 import { connect } from 'react-redux'
 import { DateRangePicker } from 'react-dates'
 import 'react-dates/lib/css/_datepicker.css'
+import './QueryElements.css'
 import 'moment'
 import TimePicker from 'react-time-picker'
-import { idFilter, 
+import {
+    idFilter,
          messageFilter,
          emailFilter,
          environmentFilter,
@@ -23,32 +25,36 @@ class QueryElements extends React.Component {
     }
 
     render() {
+        const { startTimeFilter, endTimeFilter, startDateFilter, endDateFilter, idFilter, emailFilter, environmentFilter, componentFilter, messageFilter } = this.props
+        const { startTimeControl, endTimeControl, startDateControl, endDateControl, id, email, environment, component, message } = this.props
         return (
+            <div className="QueryElementsForm">
             <form>
-                Date Filter:
+                    <label>Date Filter:</label><br />
                     <DateRangePicker
-                    startDate={this.props.startDateControl} // momentPropTypes.momentObj or null,
+                        startDate={startDateControl} // momentPropTypes.momentObj or null,
                     startDateId="your_unique_start_date_id" // PropTypes.string.isRequired,
-                    endDate={this.props.endDateControl} // momentPropTypes.momentObj or null,
+                        endDate={endDateControl} // momentPropTypes.momentObj or null,
                     endDateId="your_unique_end_date_id" // PropTypes.string.isRequired,
                     onDatesChange={({ startDate, endDate }) => {
-                        this.props.startDateFilter(startDate)
-                        this.props.endDateFilter(endDate)
+                            startDateFilter(startDate)
+                            endDateFilter(endDate)
                     }}
                     focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
                     onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
-                    isOutsideRange={day => false} />
-                <div>
-                    Time Filter:
-                    <span>Start<TimePicker onChange={this.props.startTimeFilter} value={this.props.startTimeControl} /></span>
-                    <span>End:<TimePicker onChange={this.props.endTimeFilter} value={this.props.endTimeControl} /></span>
+                        isOutsideRange={day => false} /><br />
+                    <label>Time Filter:</label><br />
+                    <span className="QueryElementsForm-TimeFilter">
+                        <TimePicker clockIcon={null} onChange={startTimeFilter} value={startTimeControl} />
+                        <TimePicker clockIcon={null} onChange={endTimeFilter} value={endTimeControl} />
+                    </span><br />
+                    <label>Id:</label><input type='text' value={id} onChange={idFilter} /><br />
+                    <label>Email:</label><input type='text' value={email} onChange={emailFilter} /><br />
+                    <label>Environment:</label><input type='text' value={environment} onChange={environmentFilter} /><br />
+                    <label>Component:</label><input type='text' value={component} onChange={componentFilter} /><br />
+                    <label>Message:</label><input type='text' value={message} onChange={messageFilter} /><br />
+                </form>
                 </div>
-                <div>Id: <input type='text' value={this.props.id} onChange={this.props.idFilter} /></div>
-                <div>Email: <input type='text' value={this.props.email} onChange={this.props.emailFilter}></input></div>
-                <div>Environment: <input type='text' value={this.props.environment} onChange={this.props.environmentFilter}></input></div>
-                <div>Component: <input type='text' value={this.props.component} onChange={this.props.componentFilter}></input></div>
-                <div>Message: <input type='text' value={this.props.message} onChange={this.props.messageFilter}></input></div>
-            </form>
         )
     }
 }
