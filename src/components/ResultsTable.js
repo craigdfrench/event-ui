@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Dimensions from 'react-dimensions'
 import { Table, Column, Cell } from 'fixed-data-table-2';
 import _ from 'lodash';
 import 'fixed-data-table-2/dist/fixed-data-table.css';
@@ -23,15 +24,16 @@ class ResultsTable extends React.Component {
     (this.props.eventResults.items && typeof this.props.eventResults.items[row][column] !== 'undefined') ? this.props.eventResults.items[row][column] : "No data"
 
   render() {
+    const {containerWidth, containerHeight, eventResults} = this.props
     if (this.props.eventResults.error) return (<div> Error: {this.props.errror} </div>)
     if (this.props.eventResults.loading) return (<div> Loading...</div>)
     if (this.props.eventResults.items == null) return (<div>No Data</div>)
     else {
       return (<Table
         rowHeight={50}
-        rowsCount={this.props.eventResults.items.length}
-        width={1000}
-        height={500}
+        rowsCount={eventResults.items.length}
+        width={containerWidth}
+        height={containerHeight}
         headerHeight={50}>
         <Column
           header={<Cell>Id</Cell>}
@@ -108,4 +110,9 @@ class ResultsTable extends React.Component {
   }
 }
 
-export default connect(state => state)(ResultsTable)
+export default connect(state => state)(Dimensions(
+  {
+      getHeight: element => window.innerHeight,
+      getWidth: element => window.innerWidth
+  }
+)(ResultsTable))
