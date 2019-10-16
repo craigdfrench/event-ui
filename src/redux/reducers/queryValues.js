@@ -72,7 +72,7 @@ export default function (state = initialState, action) {
                 ...state,
                 [actionMap[action.type]]: action.payload.contents,
             };
-            nextState.endTime = mergeDateAndTime( () => moment.endOf("today"), nextState.endDateControl, nextState.endTimeControl)
+            nextState.endTime = mergeDateAndTime( () => moment().endOf("today"), nextState.endDateControl, nextState.endTimeControl)
             return nextState
 
         default:
