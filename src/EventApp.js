@@ -8,6 +8,7 @@ import store from './redux/store'
 
 const EventApp = () =>
   <Provider store={store}>
+    <h3>Event Viewer</h3>
     <ChildrenButtonControl name='Query'>
       <QueryElements />
     </ChildrenButtonControl>
