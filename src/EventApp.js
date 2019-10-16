@@ -1,6 +1,5 @@
 import React from 'react'
 import ResultsTable from './components/ResultsTable'
-import './EventApp.css'
 import ChildrenButtonControl from './components/ChildrenButtonControl'
 import QueryElements from './components/QueryElements'
 import { Provider } from 'react-redux'
