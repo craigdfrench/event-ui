@@ -1,18 +1,18 @@
-.QueryElementsForm {
+.QueryElements-form {
     width: 500px;
     clear: both;
 }   
 
-.QueryElementsForm input {
+.QueryElements-form input {
     width: 100%;
     clear: both;    
 }
 
-.QueryElementsForm .DateRangePicker {
+.QueryElements-form .DateRangePicker {
     padding-left: 100px;
     z-index: 20;
 }
 
-.QueryElementsForm .QueryElementsForm-TimeFilter { 
+.QueryElements-form .TimeFilter { 
     padding-left: 100px;
 }

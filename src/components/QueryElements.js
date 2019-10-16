@@ -8,15 +8,15 @@ import 'moment'
 import TimePicker from 'react-time-picker'
 import {
     idFilter,
-         messageFilter,
-         emailFilter,
-         environmentFilter,
-         componentFilter,
-         startTimeFilter,
-         endTimeFilter,
-         startDateFilter,
-         endDateFilter
-         } from '../redux/eventActions'
+    messageFilter,
+    emailFilter,
+    environmentFilter,
+    componentFilter,
+    startTimeFilter,
+    endTimeFilter,
+    startDateFilter,
+    endDateFilter
+} from '../redux/eventActions'
 
 class QueryElements extends React.Component {
     constructor(props) {
@@ -28,23 +28,23 @@ class QueryElements extends React.Component {
         const { startTimeFilter, endTimeFilter, startDateFilter, endDateFilter, idFilter, emailFilter, environmentFilter, componentFilter, messageFilter } = this.props
         const { startTimeControl, endTimeControl, startDateControl, endDateControl, id, email, environment, component, message } = this.props
         return (
-            <div className="QueryElementsForm">
-            <form>
+            <div className="QueryElements-form">
+                <form>
                     <label>Date Filter:</label><br />
                     <DateRangePicker
                         startDate={startDateControl} // momentPropTypes.momentObj or null,
-                    startDateId="your_unique_start_date_id" // PropTypes.string.isRequired,
+                        startDateId="your_unique_start_date_id" // PropTypes.string.isRequired,
                         endDate={endDateControl} // momentPropTypes.momentObj or null,
-                    endDateId="your_unique_end_date_id" // PropTypes.string.isRequired,
-                    onDatesChange={({ startDate, endDate }) => {
+                        endDateId="your_unique_end_date_id" // PropTypes.string.isRequired,
+                        onDatesChange={({ startDate, endDate }) => {
                             startDateFilter(startDate)
                             endDateFilter(endDate)
-                    }}
-                    focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
-                    onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
+                        }}
+                        focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
+                        onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
                         isOutsideRange={day => false} /><br />
                     <label>Time Filter:</label><br />
-                    <span className="QueryElementsForm-TimeFilter">
+                    <span className="TimeFilter">
                         <TimePicker clockIcon={null} onChange={startTimeFilter} value={startTimeControl} />
                         <TimePicker clockIcon={null} onChange={endTimeFilter} value={endTimeControl} />
                     </span><br />
@@ -54,17 +54,17 @@ class QueryElements extends React.Component {
                     <label>Component:</label><input type='text' value={component} onChange={componentFilter} /><br />
                     <label>Message:</label><input type='text' value={message} onChange={messageFilter} /><br />
                 </form>
-                </div>
+            </div>
         )
     }
 }
 
 export default connect(
-    state => state.queryValues, 
-    { 
-        idFilter, 
-        emailFilter, 
-        environmentFilter, 
+    state => state.queryValues,
+    {
+        idFilter,
+        emailFilter,
+        environmentFilter,
         componentFilter,
         messageFilter,
         startDateFilter,
